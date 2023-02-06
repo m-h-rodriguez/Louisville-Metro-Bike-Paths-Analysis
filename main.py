@@ -39,9 +39,7 @@ print(zips_df.head())
 # Project Feature 2:  Clean Data
 
 # dropping columns that are not necessary for analysis in Bike Data
-bike_df.drop(columns=['MPWBIKEID'], inplace=True)
-bike_df.drop(columns=['SHAPELEN'], inplace=True)
-bike_df.drop(columns=['OBJECTID'], inplace=True)
+bike_df.drop(columns=['MPWBIKEID', 'SHAPELEN', 'OBJECTID'], inplace=True)
 
 # making text in column uniform to remove duplicates
 bike_df['ROADNAME'] = bike_df['ROADNAME'].str.upper()
