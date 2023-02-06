@@ -18,31 +18,25 @@ banner("Bike Data Header")
 #####
 bike_df = pd.read_csv(os.path.join(
     'DataSource', 'Jefferson_County_KY_Bikeways.csv'), sep=",", low_memory=False)
-print(bike_df.head())
 
 #####
 banner("Crime Data Header")
 #####
 crime_df = pd.read_csv(os.path.join(
     'DataSource', 'Louisville_Metro_KY_-_Crime_Data_2022.csv'), sep=",", low_memory=False)
-print(crime_df.head())
-print(crime_df.dtypes)
 
-print(bike_df.dtypes)
 
 # reading in US Zip Codes to locate the latitude and longitude coordinates to zip codes
 zips_df = pd.read_csv(os.path.join(
     'DataSource', 'US Zip Codes from 2013 Government Data.csv'), sep=",")
-print(zips_df.head())
+# renaming column headers in US Zip Codes Dataframe
+zips_df.columns = ['ZIP_CODE', 'LATITUDE', 'LONGITUDE']
 
-print(zips_df.dtypes)
 
 # Project Feature 2:  Clean Data
 
 # dropping columns that are not necessary for analysis in Bike Data
-bike_df.drop(columns=['MPWBIKEID'], inplace=True)
-bike_df.drop(columns=['SHAPELEN'], inplace=True)
-bike_df.drop(columns=['OBJECTID'], inplace=True)
+bike_df.drop(columns=['MPWBIKEID', 'SHAPELEN', 'OBJECTID'], inplace=True)
 
 # making text in column uniform to remove duplicates
 bike_df['ROADNAME'] = bike_df['ROADNAME'].str.upper()
@@ -59,17 +53,16 @@ crime_df.dropna(subset=['ZIP_CODE'], inplace=True)
 # converting datatype in crime DataFrame zips to match
 m = crime_df.dtypes == 'float64'
 crime_df.loc[:, m] = crime_df.loc[:, m].astype(int)
-print(crime_df.head())
 
-# renaming column headers in US Zip Codes Dataframe
-zips_df.columns = ['ZIP_CODE', 'LATITUDE', 'LONGITUDE']
 
+# dropping unnecessary columns from crime dataframe
+crime_df.drop(columns=['BADGE_ID', 'UCR_HIERARCHY',
+              'ATT_COMP', 'NIBRS_CODE', 'ObjectId', 'LMPD_BEAT', 'DATE_REPORTED', 'LMPD_DIVISION'], inplace=True)
 
 # merging crime data with US Zip Code dataframe
 print(pd.merge(crime_df, zips_df, on='ZIP_CODE'))
 
 
 # TO DO
-
 # separate crime street data
 # find matches on zips to pull lat and long values
