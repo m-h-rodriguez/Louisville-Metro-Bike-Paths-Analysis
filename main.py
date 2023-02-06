@@ -4,7 +4,7 @@ import numpy as np
 
 
 # function borrowed to print out banners/headers in order to separate different parts of the project for visibility
-def banner(message, banner="-"):
+def banner(message, banner="------"):
 
     line = banner * 11
     print(f"\n{line}")
@@ -17,27 +17,27 @@ def banner(message, banner="-"):
 banner("Bike Data Header")
 #####
 bike_df = pd.read_csv(os.path.join(
-    'DataSource', 'Jefferson_County_KY_Bikeways.csv'), sep=",")
+    'DataSource', 'Jefferson_County_KY_Bikeways.csv'), sep=",", low_memory=False)
 print(bike_df.head())
 
 #####
 banner("Crime Data Header")
 #####
 crime_df = pd.read_csv(os.path.join(
-    'DataSource', 'Louisville_Metro_KY_-_Crime_Data_2022.csv'), sep=",")
+    'DataSource', 'Louisville_Metro_KY_-_Crime_Data_2022.csv'), sep=",", low_memory=False)
 print(crime_df.head())
-print(crime_df.dtypes)
 
-print(bike_df.dtypes)
 
 # reading in US Zip Codes to locate the latitude and longitude coordinates to zip codes
 zips_df = pd.read_csv(os.path.join(
     'DataSource', 'US Zip Codes from 2013 Government Data.csv'), sep=",")
+# renaming column headers in US Zip Codes Dataframe
+zips_df.columns = ['ZIP_CODE', 'LATITUDE', 'LONGITUDE']
 print(zips_df.head())
 
-print(zips_df.dtypes)
 
 # Project Feature 2:  Clean Data
+
 # dropping columns that are not necessary for analysis in Bike Data
 bike_df.drop(columns=['MPWBIKEID'], inplace=True)
 bike_df.drop(columns=['SHAPELEN'], inplace=True)
