@@ -59,10 +59,15 @@ crime_df.loc[:, m] = crime_df.loc[:, m].astype(int)
 crime_df.drop(columns=['BADGE_ID', 'UCR_HIERARCHY',
               'ATT_COMP', 'NIBRS_CODE', 'ObjectId', 'LMPD_BEAT', 'DATE_REPORTED', 'LMPD_DIVISION'], inplace=True)
 
+
+# crime data remove address that leads with @
+# remove fields that have /
+# separate the address fields
+
+
 # merging crime data with US Zip Code dataframe
-print(pd.merge(crime_df, zips_df, on='ZIP_CODE'))
+#print(pd.merge(crime_df, zips_df, on='ZIP_CODE'))
 
 
 # TO DO
 # separate crime street data
-# find matches on zips to pull lat and long values
