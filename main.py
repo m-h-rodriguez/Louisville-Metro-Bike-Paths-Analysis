@@ -1,6 +1,7 @@
 import pandas as pd
 import os
 import numpy as np
+from sqlite3 import connect
 
 
 # function borrowed to print out banners/headers in order to separate different parts of the project for visibility

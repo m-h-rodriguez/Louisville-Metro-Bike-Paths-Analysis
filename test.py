@@ -1,9 +1,13 @@
 import pandas as pd
 import os
 import numpy as np
+from sqlite3 import connect
 
+conn = connect("test.db")
 
 # function borrowed to print out banners/headers in order to separate different parts of the project for visibility
+
+
 def banner(message, banner="-"):
 
     line = banner * 11
@@ -18,6 +22,7 @@ banner("Bike Data Header")
 #####
 bike_df = pd.read_csv(os.path.join(
     'DataSource', 'Jefferson_County_KY_Bikeways.csv'), sep=",", low_memory=False)
+
 
 #####
 banner("Crime Data Header")
@@ -71,3 +76,8 @@ crime_df.drop(columns=['BADGE_ID', 'UCR_HIERARCHY',
 
 # TO DO
 # separate crime street data
+
+
+#bike_df.to_sql("bike_df", conn)
+
+print(pd.read_sql("select * from bike_df", conn))
