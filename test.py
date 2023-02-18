@@ -68,19 +68,23 @@ crime_df.drop(columns=['BADGE_ID', 'UCR_HIERARCHY',
 # crime data remove address that leads with @
 crime_df = crime_df[~crime_df['BLOCK_ADDRESS'].astype(str).str.startswith('@')]
 
-
 # remove fields that have /
+crime_df = crime_df[crime_df['BLOCK_ADDRESS'].str.contains("/") == False]
+
+
 # separate the address fields
+crime_df['BLOCK_ADDRESS'].replace('.*BLOCK ', '', inplace=True, regex=True)
 
 
 # merging crime data with US Zip Code dataframe
 #print(pd.merge(crime_df, zips_df, on='ZIP_CODE'))
 
 
-# TO DO
-# separate crime street data
-
-
 #bike_df.to_sql("bike_df", conn)
+# crime_df.to_sql("crime_df", conn)
+# zips_df.to_sql("zips_df", conn)
 
 #print(pd.read_sql("select * from bike_df", conn))
+
+print(pd.read_sql("select * from crime_df limit 5", conn))
+print(pd.read_sql("select * from zips_df limit 5", conn))
