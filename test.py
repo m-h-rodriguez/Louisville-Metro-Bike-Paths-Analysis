@@ -66,6 +66,8 @@ crime_df.drop(columns=['BADGE_ID', 'UCR_HIERARCHY',
 
 
 # crime data remove address that leads with @
+crime_df = crime_df[~crime_df['BLOCK_ADDRESS'].astype(str).str.startswith('@')]
+
 
 # remove fields that have /
 # separate the address fields
