@@ -66,6 +66,7 @@ crime_df.drop(columns=['BADGE_ID', 'UCR_HIERARCHY',
 
 
 # crime data remove address that leads with @
+
 # remove fields that have /
 # separate the address fields
 
@@ -80,4 +81,4 @@ crime_df.drop(columns=['BADGE_ID', 'UCR_HIERARCHY',
 
 #bike_df.to_sql("bike_df", conn)
 
-print(pd.read_sql("select * from bike_df", conn))
+#print(pd.read_sql("select * from bike_df", conn))
