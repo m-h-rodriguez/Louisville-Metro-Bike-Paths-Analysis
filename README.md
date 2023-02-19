@@ -1,16 +1,16 @@
 ## Code Louisville Data 2 Final Project:
 This project uses the following CSV files:
-Jefferson_County_KY_Bikeways.csv
-Louisville_Metro_KY_-_Crime_Data_2022.csv
-US Zip Codes from 2013 Government Data.csv
+    * Jefferson_County_KY_Bikeways.csv
+    * Louisville_Metro_KY_-_Crime_Data_2022.csv
+    * US Zip Codes from 2013 Government Data.csv
 
 Using the CSV files, the project will read in the csv files and perform a series of clean-up statements on each dataframe.  A database is created and each csv file is used to create a table in the database for review later.  A merge is performed to add the LAT and LONG coordinates on the zip codes to the Report Crimes CSV and a new table is created.  A merge is performed to take the Crime data and merge it to the Bike Paths table.   
 
 
-### Project requirement 1:
-Line 19: Bike Data csv is read into a pandas dataframe
-Line 32: Crime Data csv is read into a pandas dataframe
-Line 40: Zip Code csv is read into a pandas dataframe
+### Project Requirement 1:
+* Line 19: Bike Data csv is read into a pandas dataframe
+* Line 32: Crime Data csv is read into a pandas dataframe
+* Line 40: Zip Code csv is read into a pandas dataframe
 
 ### Project requirement 2: 
 * Line 48: Column headers are renamed for uniformity and to merge with dataset later
@@ -27,7 +27,6 @@ Line 40: Zip Code csv is read into a pandas dataframe
 * Line 90-95: Whitespace is trimmed and removed from all dataframes
 * Line 99-101: The Bike dataframe contains multiple rows to identify the ROADNAME and the types of paths that can be located in that area.  The rows are pivoted to columns here so that they appear on one row later when merging with the Crime dataframe.
 * Line 109-111: Each CSV is added to the database as a separate table.  Once these statements are executed, the lines must be commented out to prevent errors on duplicated tables.
-
 
 
 * MERGE DATA SETS
