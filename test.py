@@ -3,12 +3,12 @@ import os
 import numpy as np
 from sqlite3 import connect
 
-conn = connect("test.db")
+conn = connect("Metro_Data.db")
 
 # function borrowed to print out banners/headers in order to separate different parts of the project for visibility
 
 
-def banner(message, banner="-"):
+def banner(message, banner="--------"):
 
     line = banner * 11
     print(f"\n{line}")
@@ -93,9 +93,9 @@ bike_pivoted = bike_df.pivot(
 bike_pivoted.columns.name = None
 
 
-# bike_df.to_sql("bike_df", conn)
-# crime_df.to_sql("crime_df", conn)
-# zips_df.to_sql("zips_df", conn)
+bike_df.to_sql("bike_df", conn)
+crime_df.to_sql("crime_df", conn)
+zips_df.to_sql("zips_df", conn)
 
 #print(pd.read_sql("select * from bike_df", conn))
 
@@ -107,8 +107,11 @@ bike_pivoted.columns.name = None
 # merging crime data with US Zip Code dataframe
 Lou_Crime_Reports = crime_df.merge(zips_df, how="left", on='ZIP_CODE')
 
-# Lou_Crime_Reports.to_sql("Lou_Crime_Reports", conn)
+Lou_Crime_Reports.to_sql("Lou_Crime_Reports", conn)
 
-# # merging Crime Data with Bike Paths
-Crime_Bike_Paths = crime_df.merge(bike_pivoted, how="left", on='ROADNAME')
-#Crime_Bike_Paths.to_sql("Crime_Bike_Paths", conn)
+# merging Crime Data with Bike Paths
+Crime_Bike_Paths = Lou_Crime_Reports.merge(
+    bike_pivoted, how="left", on='ROADNAME')
+Crime_Bike_Paths.to_sql("Crime_Bike_Paths", conn)
+
+# print(Crime_Bike_Paths.columns)
