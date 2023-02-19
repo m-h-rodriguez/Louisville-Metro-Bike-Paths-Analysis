@@ -55,6 +55,9 @@ crime_df["ZIP_CODE"] = crime_df["ZIP_CODE"].apply(
 crime_df['ZIP_CODE'].replace('', np.nan, inplace=True)
 crime_df.dropna(subset=['ZIP_CODE'], inplace=True)
 
+# renaming column for merge later
+crime_df.rename(columns={'BLOCK_ADDRESS': 'ROADNAME'}, inplace=True)
+
 # converting datatype in crime DataFrame zips to match
 m = crime_df.dtypes == 'float64'
 crime_df.loc[:, m] = crime_df.loc[:, m].astype(int)
@@ -66,25 +69,46 @@ crime_df.drop(columns=['BADGE_ID', 'UCR_HIERARCHY',
 
 
 # crime data remove address that leads with @
-crime_df = crime_df[~crime_df['BLOCK_ADDRESS'].astype(str).str.startswith('@')]
+crime_df = crime_df[~crime_df['ROADNAME'].astype(str).str.startswith('@')]
 
 # remove fields that have /
-crime_df = crime_df[crime_df['BLOCK_ADDRESS'].str.contains("/") == False]
+crime_df = crime_df[crime_df['ROADNAME'].str.contains("/") == False]
 
 
 # separate the address fields
-crime_df['BLOCK_ADDRESS'].replace('.*BLOCK ', '', inplace=True, regex=True)
+crime_df['ROADNAME'].replace('.*BLOCK ', '', inplace=True, regex=True)
 
 
-# merging crime data with US Zip Code dataframe
-#print(pd.merge(crime_df, zips_df, on='ZIP_CODE'))
+# trimming out extra whitespace
+crime_df = crime_df.apply(lambda x: x.str.strip()
+                          if x.dtype == "object" else x)
+bike_df = bike_df.apply(lambda x: x.str.strip()
+                        if x.dtype == "object" else x)
+zips_df = zips_df.apply(lambda x: x.str.strip()
+                        if x.dtype == "object" else x)
 
 
-#bike_df.to_sql("bike_df", conn)
+bike_pivoted = bike_df.pivot(
+    index='ROADNAME', columns='MAP_TYPE', values='MAP_TYPE').reset_index()
+bike_pivoted.columns.name = None
+
+
+# bike_df.to_sql("bike_df", conn)
 # crime_df.to_sql("crime_df", conn)
 # zips_df.to_sql("zips_df", conn)
 
 #print(pd.read_sql("select * from bike_df", conn))
 
-print(pd.read_sql("select * from crime_df limit 5", conn))
-print(pd.read_sql("select * from zips_df limit 5", conn))
+# print(pd.read_sql("select * from crime_df limit 5", conn))
+# print(pd.read_sql("select * from zips_df limit 5", conn))
+
+
+# merging tables
+# merging crime data with US Zip Code dataframe
+Lou_Crime_Reports = crime_df.merge(zips_df, how="left", on='ZIP_CODE')
+
+# Lou_Crime_Reports.to_sql("Lou_Crime_Reports", conn)
+
+# # merging Crime Data with Bike Paths
+Crime_Bike_Paths = crime_df.merge(bike_pivoted, how="left", on='ROADNAME')
+#Crime_Bike_Paths.to_sql("Crime_Bike_Paths", conn)

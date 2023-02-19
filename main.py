@@ -88,6 +88,7 @@ crime_df['BLOCK_ADDRESS'].replace('.*BLOCK ', '', inplace=True, regex=True)
 # crime_df.to_sql("crime_df", conn)
 # zips_df.to_sql("zips_df", conn)
 
+
 #####
 banner("Louisville Metro Bike Database Table")
 #####
@@ -104,3 +105,8 @@ print(pd.read_sql("select * from crime_df limit 5", conn))
 banner("Zipcode Database Table")
 #####
 print(pd.read_sql("select * from zips_df limit 5", conn))
+
+
+# merging tables
+
+pd.read_sql("create table crime_locations as select * from crime")
