@@ -18,7 +18,7 @@ The program is executed from the terminal on main.py.
 * Line 32: Crime Data csv is read into a pandas dataframe
 * Line 40: Zip Code csv is read into a pandas dataframe
 
-### Project requirement 2: 
+### Project Requirement 2: 
 * Line 48: Column headers are renamed for uniformity and to merge with dataset later
 * Line 51: Columns not needed from the Bike dataframe are dropped
 * Line 54: Column in Bike dataframe is renamed for uniformity for later merge
@@ -40,7 +40,7 @@ The program is executed from the terminal on main.py.
 
 
 
-### Project requirement 3: 
+### Project Requirement 3: 
 * MAKE A TABLEAU DASHBOARD
 
 
