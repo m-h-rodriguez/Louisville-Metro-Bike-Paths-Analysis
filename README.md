@@ -1,10 +1,16 @@
 ## Code Louisville Data 2 Final Project:
 This project uses the following CSV files:
+
     * Jefferson_County_KY_Bikeways.csv
     * Louisville_Metro_KY_-_Crime_Data_2022.csv
     * US Zip Codes from 2013 Government Data.csv
 
 Using the CSV files, the project will read in the csv files and perform a series of clean-up statements on each dataframe.  A database is created and each csv file is used to create a table in the database for review later.  A merge is performed to add the LAT and LONG coordinates on the zip codes to the Report Crimes CSV and a new table is created.  A merge is performed to take the Crime data and merge it to the Bike Paths table.   
+
+The requirements.txt contains the necessary modules that need to be installed.  Navigating to the command prompt, 'pip install -r requirements.txt" for each module in the list to ensure the program will sucessfully execute.
+Sqlite3 is added to the requirements txt but is not necessarily needed as a pip install.  If the module is already available in the version being used, the install may fail. 
+Additionally, the extension SQLite can be added to VS Code to assist in viewing the database created.   
+The program is executed from the terminal on main.py.
 
 
 ### Project Requirement 1:
@@ -27,9 +33,12 @@ Using the CSV files, the project will read in the csv files and perform a series
 * Line 90-95: Whitespace is trimmed and removed from all dataframes
 * Line 99-101: The Bike dataframe contains multiple rows to identify the ROADNAME and the types of paths that can be located in that area.  The rows are pivoted to columns here so that they appear on one row later when merging with the Crime dataframe.
 * Line 109-111: Each CSV is added to the database as a separate table.  Once these statements are executed, the lines must be commented out to prevent errors on duplicated tables.
+* Line 138: Left join is performed on the Crime dataframe and the Zipcode dataframe to create new dataframe Lou_Crime_Reports
+* Line 144: The performed merge is added as a new table to the database. Once this statement is executed to create the table, it must be commented out to prevent errors running the program.
+* Line 155: The Lou_Crime_Reports dataframe is merged to the Bike_Paths dataframe
+* Line 160: A new table is created in the database for the merged data set.  Once this is executed, the statement must be commented out to prevent errors running the program after. 
 
 
-* MERGE DATA SETS
 
 ### Project requirement 3: 
 * MAKE A TABLEAU DASHBOARD
