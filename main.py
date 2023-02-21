@@ -2,6 +2,8 @@ import pandas as pd
 import os
 import numpy as np
 from sqlite3 import connect
+import xlsxwriter
+
 
 conn = connect("Metro_Data.db")
 
@@ -164,3 +166,10 @@ banner("Database Tabe: Crime_Bike_Paths")
 #####
 
 print(pd.read_sql("select * from Crime_Bike_Paths limit 5", conn))
+
+
+writer = pd.ExcelWriter('Metro_Data.xlsx', engine='xlsxwriter')
+Crime_Bike_Paths.to_excel(writer, sheet_name='Crime_Bike_Paths')
+Lou_Crime_Reports.to_excel(writer, sheet_name='Lou_Crime_Reports')
+bike_df.to_excel(writer, sheet_name='Bike_Data')
+writer.close()
