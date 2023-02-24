@@ -112,7 +112,6 @@ after the tables are created to prevent errors going forward.
 # crime_df.to_sql("Reported_Crime_Data", conn)
 # zips_df.to_sql("Zipcode_Locations", conn)
 
-
 #####
 banner("Database Tabe: Bike_Path_Data")
 #####
@@ -134,7 +133,6 @@ banner("Database Tabe: Zipcode_Locations")
 
 print(pd.read_sql("select * from Zipcode_Locations limit 5", conn))
 
-
 # merging tables
 # merging crime data with US Zip Code dataframe
 Lou_Crime_Reports = crime_df.merge(zips_df, how="left", on='ZIP_CODE')
@@ -153,7 +151,7 @@ print(pd.read_sql("select * from Lou_Crime_Reports limit 5", conn))
 
 # merging Crime Data with Bike Paths
 Crime_Bike_Paths = Lou_Crime_Reports.merge(
-    bike_pivoted, how="left", on='ROADNAME')
+    bike_pivoted, how="inner", on='ROADNAME')
 
 """
 Once the statement to create the Crime_Bike_Paths is executed, comment out the 
