@@ -49,11 +49,13 @@ bike_df['ROADNAME'] = bike_df['ROADNAME'].str.upper()
 # dropping duplicated rows
 bike_df.drop_duplicates(inplace=True)
 
+
 # dropping NaN values from zip code column
 crime_df["ZIP_CODE"] = crime_df["ZIP_CODE"].apply(
     pd.to_numeric, errors='coerce').fillna('')
 crime_df['ZIP_CODE'].replace('', np.nan, inplace=True)
 crime_df.dropna(subset=['ZIP_CODE'], inplace=True)
+
 
 # renaming column for merge later
 crime_df.rename(columns={'BLOCK_ADDRESS': 'ROADNAME'}, inplace=True)
@@ -88,30 +90,30 @@ zips_df = zips_df.apply(lambda x: x.str.strip()
                         if x.dtype == "object" else x)
 
 
-bike_pivoted = bike_df.pivot(
-    index='ROADNAME', columns='MAP_TYPE', values='MAP_TYPE').reset_index()
-bike_pivoted.columns.name = None
+# bike_pivoted = bike_df.pivot(
+#     index='ROADNAME', columns='MAP_TYPE', values='MAP_TYPE').reset_index()
+# bike_pivoted.columns.name = None
 
 
-bike_df.to_sql("bike_df", conn)
-crime_df.to_sql("crime_df", conn)
-zips_df.to_sql("zips_df", conn)
+# bike_df.to_sql("bike_df", conn)
+# crime_df.to_sql("crime_df", conn)
+# zips_df.to_sql("zips_df", conn)
 
-#print(pd.read_sql("select * from bike_df", conn))
+# #print(pd.read_sql("select * from bike_df", conn))
 
-# print(pd.read_sql("select * from crime_df limit 5", conn))
-# print(pd.read_sql("select * from zips_df limit 5", conn))
+# # print(pd.read_sql("select * from crime_df limit 5", conn))
+# # print(pd.read_sql("select * from zips_df limit 5", conn))
 
 
-# merging tables
-# merging crime data with US Zip Code dataframe
-Lou_Crime_Reports = crime_df.merge(zips_df, how="left", on='ZIP_CODE')
+# # merging tables
+# # merging crime data with US Zip Code dataframe
+# Lou_Crime_Reports = crime_df.merge(zips_df, how="left", on='ZIP_CODE')
 
-Lou_Crime_Reports.to_sql("Lou_Crime_Reports", conn)
+# Lou_Crime_Reports.to_sql("Lou_Crime_Reports", conn)
 
-# merging Crime Data with Bike Paths
-Crime_Bike_Paths = Lou_Crime_Reports.merge(
-    bike_pivoted, how="left", on='ROADNAME')
-Crime_Bike_Paths.to_sql("Crime_Bike_Paths", conn)
+# # merging Crime Data with Bike Paths
+# Crime_Bike_Paths = Lou_Crime_Reports.merge(
+#     bike_pivoted, how="left", on='ROADNAME')
+# Crime_Bike_Paths.to_sql("Crime_Bike_Paths", conn)
 
-# print(Crime_Bike_Paths.columns)
+# # print(Crime_Bike_Paths.columns)
