@@ -45,4 +45,4 @@ https://public.tableau.com/views/LouisvilleMetroBikePathandCrimeAnalysis/Story1?
 
 
 ### Project Requirement 4: 
-* Annotate your .py files with well-written comments and a clear README.md
+* .py files must be annotated with well-written comments and a clear README.md
