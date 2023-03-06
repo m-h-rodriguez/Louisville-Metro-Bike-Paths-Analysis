@@ -31,13 +31,15 @@ The program is executed from the terminal on main.py.
 * Line 82: Rows in the ROADNAME column have a character that splits roadnames.  These rows are dropped from the dataset.
 * Line 86: ROADNAME values contain address BLOCKS, this is removed from the dataset
 * Line 90-95: Whitespace is trimmed and removed from all dataframes
-* Line 99-101: The Bike dataframe contains multiple rows to identify the ROADNAME and the types of paths that can be located in that area.  The rows are pivoted to columns here so that they appear on one row later when merging with the Crime dataframe.
-* Line 109-111: Each CSV is added to the database as a separate table.  Once these statements are executed, the lines must be commented out to prevent errors on duplicated tables.
-* Line 138: Left join is performed on the Crime dataframe and the Zipcode dataframe to create new dataframe Lou_Crime_Reports
-* Line 144: The performed merge is added as a new table to the database. Once this statement is executed to create the table, it must be commented out to prevent errors running the program.
-* Line 155: The Lou_Crime_Reports dataframe is merged to the Bike_Paths dataframe
-* Line 160: A new table is created in the database for the merged data set.  Once this is executed, the statement must be commented out to prevent errors running the program after. 
-
+* Line 98: Removing blank rows in the Premise Type column
+* Line 101-107: Created an array of premise types to filter down the dataset to use.  These are types that will impact cyclists.
+* Line 110-113: The Bike dataframe contains multiple rows to identify the ROADNAME and the types of paths that can be located in that area.  The rows are pivoted to columns here so that they appear on one row later when merging with the Crime dataframe.
+* Line 116-123: Each CSV is added to the database as a separate table.  Once these statements are executed, the lines must be commented out to prevent errors on duplicated tables.
+* Line 148: Left join is performed on the Crime dataframe and the Zipcode dataframe to create new dataframe Lou_Crime_Reports
+* Line 154: The performed merge is added as a new table to the database. Once this statement is executed to create the table, it must be commented out to prevent errors running the program.
+* Line 163: The Lou_Crime_Reports dataframe is merged to the Bike_Paths dataframe
+* Line 170: A new table is created in the database for the merged data set.  Once this is executed, the statement must be commented out to prevent errors running the program after. 
+* Line 178: Exporting the dataframes to excel for use in Tableau.
 
 
 ### Project Requirement 3: 

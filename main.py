@@ -118,9 +118,9 @@ Creating database table for the csv files that are used for analysis
 Statments can only be executed once to create the table. Comment out the statements
 after the tables are created to prevent errors going forward.
 """
-bike_df.to_sql("Bike_Path_Data", conn)
-crime_df.to_sql("Reported_Crime_Data", conn)
-zips_df.to_sql("Zipcode_Locations", conn)
+# bike_df.to_sql("Bike_Path_Data", conn)
+# crime_df.to_sql("Reported_Crime_Data", conn)
+# zips_df.to_sql("Zipcode_Locations", conn)
 
 #####
 banner("Database Tabe: Bike_Path_Data")
@@ -151,7 +151,7 @@ Lou_Crime_Reports = crime_df.merge(zips_df, how="left", on='ZIP_CODE')
 Once the statement to create the Lou_Crime_Reports is executed, comment out the 
 statement to prevents errors when the program runs. 
 """
-Lou_Crime_Reports.to_sql("Lou_Crime_Reports", conn)
+# Lou_Crime_Reports.to_sql("Lou_Crime_Reports", conn)
 
 #####
 banner("Database Tabe: Lou_Crime_Reports")
@@ -167,7 +167,7 @@ Crime_Bike_Paths = Lou_Crime_Reports.merge(
 Once the statement to create the Crime_Bike_Paths is executed, comment out the 
 statement to prevents errors when the program runs. 
 """
-Crime_Bike_Paths.to_sql("Crime_Bike_Paths", conn)
+# Crime_Bike_Paths.to_sql("Crime_Bike_Paths", conn)
 
 #####
 banner("Database Tabe: Crime_Bike_Paths")
@@ -175,7 +175,7 @@ banner("Database Tabe: Crime_Bike_Paths")
 
 print(pd.read_sql("select * from Crime_Bike_Paths limit 5", conn))
 
-
+# Exporting to Excel for use with Tableau.
 writer = pd.ExcelWriter('Metro_Data.xlsx', engine='xlsxwriter')
 Crime_Bike_Paths.to_excel(writer, sheet_name='Crime_Bike_Paths', index=False)
 Lou_Crime_Reports.to_excel(writer, sheet_name='Lou_Crime_Reports', index=False)
