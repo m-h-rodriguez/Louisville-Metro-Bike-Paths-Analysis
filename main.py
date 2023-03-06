@@ -87,7 +87,6 @@ crime_df = crime_df[crime_df['ROADNAME'].str.contains("/") == False]
 # separate the address fields
 crime_df['ROADNAME'].replace('.*BLOCK ', '', inplace=True, regex=True)
 
-
 # trimming out extra whitespace
 crime_df = crime_df.apply(lambda x: x.str.strip()
                           if x.dtype == "object" else x)
@@ -95,6 +94,17 @@ bike_df = bike_df.apply(lambda x: x.str.strip()
                         if x.dtype == "object" else x)
 zips_df = zips_df.apply(lambda x: x.str.strip()
                         if x.dtype == "object" else x)
+
+# cleaning up Crime datasource by removing fields where PREMISE_TYPE is null
+crime_df = crime_df[crime_df['PREMISE_TYPE'].notna()]
+
+# filtering Crime dataset to premise types that could impact cyclists
+premise_filter = ['HIGHWAY / ROAD / ALLEY', 'PARKING LOT / GARAGE',
+                  'SERVICE / GAS STATION', 'OTHER / UNKNOWN', 'AIR / BUS / TRAIN TERMINAL',
+                  'ATTACHED RESIDENTIAL GARAGE', 'PARK / PLAYGROUND', 'SCHOOL - COLLEGE / UNIVERSITY',
+                  'ATM SEPARATE FROM BANK']
+# dropping all rows not in the filter array
+crime_df = crime_df[crime_df['PREMISE_TYPE'].isin(premise_filter)]
 
 
 # rows are pivoted and made to columns
@@ -108,9 +118,9 @@ Creating database table for the csv files that are used for analysis
 Statments can only be executed once to create the table. Comment out the statements
 after the tables are created to prevent errors going forward.
 """
-# bike_df.to_sql("Bike_Path_Data", conn)
-# crime_df.to_sql("Reported_Crime_Data", conn)
-# zips_df.to_sql("Zipcode_Locations", conn)
+bike_df.to_sql("Bike_Path_Data", conn)
+crime_df.to_sql("Reported_Crime_Data", conn)
+zips_df.to_sql("Zipcode_Locations", conn)
 
 #####
 banner("Database Tabe: Bike_Path_Data")
@@ -141,7 +151,7 @@ Lou_Crime_Reports = crime_df.merge(zips_df, how="left", on='ZIP_CODE')
 Once the statement to create the Lou_Crime_Reports is executed, comment out the 
 statement to prevents errors when the program runs. 
 """
-# Lou_Crime_Reports.to_sql("Lou_Crime_Reports", conn)
+Lou_Crime_Reports.to_sql("Lou_Crime_Reports", conn)
 
 #####
 banner("Database Tabe: Lou_Crime_Reports")
@@ -157,7 +167,7 @@ Crime_Bike_Paths = Lou_Crime_Reports.merge(
 Once the statement to create the Crime_Bike_Paths is executed, comment out the 
 statement to prevents errors when the program runs. 
 """
-# Crime_Bike_Paths.to_sql("Crime_Bike_Paths", conn)
+Crime_Bike_Paths.to_sql("Crime_Bike_Paths", conn)
 
 #####
 banner("Database Tabe: Crime_Bike_Paths")
