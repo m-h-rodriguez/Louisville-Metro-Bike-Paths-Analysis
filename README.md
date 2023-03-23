@@ -46,5 +46,28 @@ The program is executed from the terminal on main.py.
 https://public.tableau.com/views/LouisvilleMetroBikePathandCrimeAnalysis/Story1?:language=en-US&publish=yes&:display_count=n&:origin=viz_share_link
 
 
-### Project Requirement 4: 
+### Project Requirement 4:
+* Data Dictionary
+
+| Column Name            | Description                           | Source          |  Datatype  |
+| ---------------------- |:-------------------------------------:|:---------------:|  ---------:|
+| INCIDENT_NUMBER        | Assigned crime incident number        | Lou Metro Crime |     object |
+| DATE_OCCURED           | Date crime was investigated           | Lou Metro Crime |     object |
+| CRIME_TYPE             | Crime category assigned               | Lou Metro Crime |     object |
+| UOR_DESC               | Decription of incident/crime          | Lou Metro Crime |     object | 
+| PREMISE_TYPE           | Description of area crime occurred    | Lou Metro Crime |     object |
+| ROADNAME               | Road where crime was investigated     | Lou Metro Crime |     object |
+| City                   | City where crime was investigated     | Lou Metro Crime |     object |
+| ZIP_CODE               | Zip code where crime was investigated | Lou Metro Crime |      int32 |
+| LATITUDE               | Lat coordinates matched to zip code   | US Zip Code     |    float64 |
+| LONGITUDE              | Long coordinates matched to zip code  | US Zip Code     |    float64 |
+| Bike Lane              | Identified Bike Lane Type             | Lou Metro Bike  |     object |
+| Buffered Bike Lane     | Identified Bike Lane Type             | Lou Metro Bike  |     object |
+| Neighborway            | Identified Bike Lane Type             | Lou Metro Bike  |     object |
+| Offroad Trail          | Identified Bike Lane Type             | Lou Metro Bike  |     object |
+| Shared Lane Connection | Identified Bike Lane Type             | Lou Metro Bike  |     object |
+| Shared Use Path        | Identified Bike Lane Type             | Lou Metro Bike  |     object |
+
+
+### Project Requirement 5: 
 * .py files must be annotated with well-written comments and a clear README.md
