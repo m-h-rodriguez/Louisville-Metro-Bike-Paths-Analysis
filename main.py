@@ -123,21 +123,21 @@ after the tables are created to prevent errors going forward.
 # zips_df.to_sql("Zipcode_Locations", conn)
 
 #####
-banner("Database Tabe: Bike_Path_Data")
+banner("Database Table: Bike_Path_Data")
 #####
 
 print(pd.read_sql("select * from Bike_Path_Data", conn))
 
 
 #####
-banner("Database Tabe: Reported_Crime_Data")
+banner("Database Table: Reported_Crime_Data")
 #####
 
 print(pd.read_sql("select * from Reported_Crime_Data limit 5", conn))
 
 
 #####
-banner("Database Tabe: Zipcode_Locations")
+banner("Database Table: Zipcode_Locations")
 #####
 
 
@@ -154,7 +154,7 @@ statement to prevents errors when the program runs.
 # Lou_Crime_Reports.to_sql("Lou_Crime_Reports", conn)
 
 #####
-banner("Database Tabe: Lou_Crime_Reports")
+banner("Database Table: Lou_Crime_Reports")
 #####
 
 print(pd.read_sql("select * from Lou_Crime_Reports limit 5", conn))
@@ -170,7 +170,7 @@ statement to prevents errors when the program runs.
 # Crime_Bike_Paths.to_sql("Crime_Bike_Paths", conn)
 
 #####
-banner("Database Tabe: Crime_Bike_Paths")
+banner("Database Table: Crime_Bike_Paths")
 #####
 
 print(pd.read_sql("select * from Crime_Bike_Paths limit 5", conn))
